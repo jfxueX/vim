@@ -1,0 +1,3 @@
+- [Vim Recipes](http://www.linuxguruz.org/ebooks/books/vim-recipes.pdf)
+- [OPL](http://ftp//ftp.vim.org/pub/vim/doc/book/vimbook-OPL.pdf)
+- [学习vi和Vim编辑器（第7版）](https://download.csdn.net/download/jfxue26/10612071)
