@@ -8,4 +8,4 @@
 
 [1]:https://vim-jp.org/
 [2]:https://plus.google.com/communities/105049811056605918816
-[3]:https://plus.google.com/u/0/communities/113765877195159278422)
+[3]:https://plus.google.com/u/0/communities/113765877195159278422
