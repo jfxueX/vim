@@ -1,0 +1,6 @@
+- [VIM Reference Manual](http://vimdoc.sourceforge.net/htmldoc/help.html#reference_toc)
+- [VIM User Manual](http://vimdoc.sourceforge.net/htmldoc/usr_toc.html)
+- [VIM 8.0 Reference Manual](http://www.polarhome.com/vim/manual/v80/index.html)
+- [VIM 8.0 User Manual](http://www.polarhome.com/vim/manual/v80/usr_toc.html)
+- [VIM 8.0 Reference Manual (Chinese, PDF)](https://nchc.dl.sourceforge.net/project/vimcdoc/pdf-manual/reference-2.1.0.pdf)
+- [VIM 8.0 User Manual (Chinese, PDF)](https://nchc.dl.sourceforge.net/project/vimcdoc/pdf-manual/user_manual-2.1.0.pdf)

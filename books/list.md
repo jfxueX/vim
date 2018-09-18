@@ -1,3 +1,4 @@
-- [Vim Recipes](http://www.linuxguruz.org/ebooks/books/vim-recipes.pdf)
-- [OPL](http://ftp//ftp.vim.org/pub/vim/doc/book/vimbook-OPL.pdf)
-- [学习vi和Vim编辑器（第7版）](https://download.csdn.net/download/jfxue26/10612071)
+- [Vim Recipes (pdf)](http://www.linuxguruz.org/ebooks/books/vim-recipes.pdf)
+- [OPL (pdf)](http://ftp//ftp.vim.org/pub/vim/doc/book/vimbook-OPL.pdf)
+- [Vim Cookbook (htm)](http://www.oualline.com/vim-cook.html)
+- [学习vi和Vim编辑器（第7版）(pdf)](https://download.csdn.net/download/jfxue26/10612071)
