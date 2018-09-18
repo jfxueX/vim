@@ -3,6 +3,8 @@
 [vim_dev][3]: Bugs, new features, and other development issues are discussed on this list.
 [vim_mac][4]: This list is for discussing the use and development of Vim on the Mac OS.
 
+
+
 [1]:https://groups.google.com/forum/#!forum/vim_announce
 [2]:https://groups.google.com/forum/#!forum/vim_use
 [3]:https://groups.google.com/forum/#!forum/vim_dev
