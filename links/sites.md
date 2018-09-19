@@ -8,6 +8,7 @@
 - [Vim FAQ][8]
 - [Dr Chip's Vim Page][9]
 - [Vi Lover][10]
+- [Nameless Vim use][11]: Japanese
 
 
 [1]:http://www.vim.org/
@@ -20,3 +21,4 @@
 [8]:http://vimdoc.sourceforge.net/htmldoc/vimfaq.html
 [9]:http://www.drchip.org/astronaut/vim/
 [10]:http://thomer.com/vi/vi.html
+[11]:http://nanasi.jp/
