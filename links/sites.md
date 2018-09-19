@@ -5,7 +5,9 @@
 - [Vim Magazine][5]: Vim Magazine Monthly, Japanese
 - [Vim Reading Metting][6]: 
 - [Vim Tips Wiki][7]
-- [Dr Chip's Vim Page][8]
+- [Vim FAQ][8]
+- [Dr Chip's Vim Page][9]
+- [Vi Lover][10]
 
 
 [1]:http://www.vim.org/
@@ -15,4 +17,6 @@
 [5]:https://vim-jp.org/magazines.html
 [6]:https://vim-jp.org/reading-vimrc/
 [7]:http://vim.wikia.com/wiki/Vim_Tips_Wiki
-[8]:http://www.drchip.org/astronaut/vim/
+[8]:http://vimdoc.sourceforge.net/htmldoc/vimfaq.html
+[9]:http://www.drchip.org/astronaut/vim/
+[10]:http://thomer.com/vi/vi.html
