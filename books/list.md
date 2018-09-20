@@ -6,7 +6,8 @@
 - [VimL 语言编程指北路][6]
 - [Vim 脚本代码规范][7]: Vim 脚本编程规范中文版
 - [Google Vimscript Guide][8]
-- [A Byte of Vim (pdf)][9]: [online](https://www.gitbook.com/download/pdf/book/swaroopch/byte-of-vim)
+- [A Byte of Vim (pdf)][9]: read [online](https://www.gitbook.com/download/pdf/book/swaroopch/byte-of-vim)
+- [Vim Galore][10]: Everything you need to know about vim
 
 
 [1]:http://www.linuxguruz.org/ebooks/books/vim-recipes.pdf
@@ -18,3 +19,4 @@
 [7]:https://github.com/vim-china/vim-script-style-guide
 [8]:https://google.github.io/styleguide/vimscriptfull.xml
 [9]:https://www.gitbook.com/download/pdf/book/swaroopch/byte-of-vim
+[10]:https://github.com/mhinz/vim-galore
