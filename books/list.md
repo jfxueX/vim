@@ -8,6 +8,7 @@
 - [Google Vimscript Guide][8]
 - [A Byte of Vim (pdf)][9]: read [online](https://www.gitbook.com/download/pdf/book/swaroopch/byte-of-vim)
 - [Vim Galore][10]: Everything you need to know about vim
+- [Use Vim as IDE][11]
 
 
 [1]:http://www.linuxguruz.org/ebooks/books/vim-recipes.pdf
@@ -20,3 +21,4 @@
 [8]:https://google.github.io/styleguide/vimscriptfull.xml
 [9]:https://www.gitbook.com/download/pdf/book/swaroopch/byte-of-vim
 [10]:https://github.com/mhinz/vim-galore
+[11]:https://github.com/yangyangwithgnu/use_vim_as_ide
