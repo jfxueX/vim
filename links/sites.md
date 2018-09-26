@@ -9,6 +9,7 @@
 - [Dr Chip's Vim Page][9]
 - [Vi Lover][10]
 - [Nameless Vim use][11]: Japanese
+- [永遠に未完成][12]: Japanese
 
 
 [1]:http://www.vim.org/
@@ -22,3 +23,4 @@
 [9]:http://www.drchip.org/astronaut/vim/
 [10]:http://thomer.com/vi/vi.html
 [11]:http://nanasi.jp/
+[12]:https://thinca.hatenablog.com/
