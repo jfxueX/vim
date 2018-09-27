@@ -108,20 +108,20 @@
 | 55 | `:%s#txtdev\zs\d#\=submatch(0)+1#g`                      | better `:h /\zs`
 | 56 | `:%s/\(gg\)\@<=\d\+/\=submatch(0)+6/`                    | increment only numbers `gg\d\d` by 6 (another way)
 |    |                                                          | **rename a string with an incrementing number**
-| 57 | `:let i=10 \| 'a,'bg/Abc/s/yy/\=i/ \|let i=i+1`          | convert yy to 10,11,12 etc
-| 58 | `:let i=10 \| 'a,'bg/Abc/s/xx\zsyy\ze/\=i/ \|let i=i+1`  | convert xxyy to xx11,xx12,xx13(as above but more precise)
-| 59 | `:%s/"\([^.]\+\).*\zsxx/\1/`                             | find replacement text, put in memory, then use \zs to simplify substitute
+| 57 | `:let i=10 \| 'a,'bg/Abc/s/yy/\=i/ \|let i=i+1`          | convert `yy` to 10,11,12 etc
+| 58 | `:let i=10 \| 'a,'bg/Abc/s/xx\zsyy\ze/\=i/ \|let i=i+1`  | convert `xxyy` to xx11,xx12,xx13(as above but more precise)
+| 59 | `:%s/"\([^.]\+\).*\zsxx/\1/`                             | find replacement text, put in memory, then use `\zs` to simplify substitute
 | 60 | `:nmap <leader>z :%s#\<<c-r>=expand("<cword>")<cr>\>#`   | Pull word under cursor into LHS of a substitute
 | 61 | `:vmap <leader>z :<C-U>%s/\<<c-r>*\>/`                   | Pull Visually Highlighted text into LHS of a substitute
 | 62 | `:'a,'bs/bucket\(s\)*/bowl\1/gic`                        | substitute singular or plural [N]
-| <td rowspan=70>**best-global command**
-|  1 | `:g/gladiolli/#`             | display with line numbers (YOU WANT THIS!)
+| <td rowspan=43>**best-global command**
+|  1 | `:g/gladiolli/#`             | display with line numbers (**YOU WANT THIS!**)
 |  2 | `:g/fred.*joe.*dick/`        | display all lines fred,joe & dick
 |  3 | `:g/\<fred\>/`               | display all lines fred but not freddy
 |  4 | `:g/^\s*$/d`                 | delete all blank lines
 |  5 | `:g!/^dd/d`                  | delete lines not containing string
 |  6 | `:v/^dd/d`                   | delete lines not containing string
-|  7 | `:g/joe/,/fred/d`            | not line based (very powerfull)
+|  7 | `:g/joe/,/fred/d`            | not line based (**very powerfull**)
 |  8 | `:g/fred/,/joe/j`            | Join Lines [N]
 |  9 | `:g/-------/.-10,.d`         | Delete string & 10 previous lines
 | 10 | `:g/{/ ,/}/- s/\n\+/\r/g`    | Delete empty lines but only between {...}
@@ -130,7 +130,7 @@
 | 13 | `:g/^$/,/./-j`               | compress empty lines
 | 14 | `:g/<input\|<form/p`         | ORing
 | 15 | `:g/^/put_`                  | double space file (pu = put)
-| 16 | `:g/^/m0`                    | Reverse file (m = move)
+| 16 | `:g/^/m0`                    | Reverse file (`m` = move)
 | 17 | `:g/^/m$`                    | No effect! [N]
 | 18 | `:'a,'bg/^/m'b`              | Reverse a section a to b
 | 19 | `:g/^/t.`                    | duplicate every line
@@ -142,22 +142,22 @@
 | 25 | `:'a,'bg/somestr/co/otherstr/`               | match all lines containing "somestr" between markers a & copy after line containing "otherstr"
 | 26 | `:'a,'bg/str1/s/str1/&&&/\|mo/str2/`         | as above but also do a substitution
 | 27 | `:%norm jdd`                                 | delete every other line
-| 28 | `:.,$g/^\d/exe "norm! \<c-a>"`               | increment numbers, incrementing numbers (type <c-a> as 5 characters)
-| 29 | `:'a,'bg/\d\+/norm! ^A`                      | increment numbers, storing glob results (note must use APPEND) you need to empty reg a first with qaq. 
+| 28 | `:.,$g/^\d/exe "norm! \<c-a>"`               | increment numbers, incrementing numbers (type `<c-a>` as 5 characters)
+| 29 | `:'a,'bg/\d\+/norm! ^A`                      | increment numbers, storing glob results (note must use **APPEND**) you need to empty reg a first with qaq. 
 |    |                                              | **save results to a register/paste buffer**
-| 30 | `:g/fred/y A`                                | append all lines fred to register a
+| 30 | `:g/fred/y A`                                | append all lines fred to register `a`
 | 31 | `:g/fred/y A \| :let @*=@a`                  | put into paste buffer
 | 32 | `:g//y A \| :let @*=@a`                      | put last glob into paste buffer [N]
 | 33 | `:let @a=''\|g/Barratt/y A \| :let @*=@a`    |
 | 34 | `:'a,'bg/^Error/ . w >> errors.txt`          | filter lines to a file (file must already exist)
 | 35 | `:g/./yank\|put\|-1s/'/"/g\|s/.*/Print '&'/` | duplicate every line in a file wrap a print '' around each duplicate
-| 36 | `:g/^MARK$/r tmp.txt \| -d`                  | replace string with contents of a file, -d deletes the "mark"
+| 36 | `:g/^MARK$/r tmp.txt \| -d`                  | replace string with contents of a file, `-d` deletes the "mark"
 |    |                                              | display prettily
 | 37 | `:g/<pattern>/z#.5`                          | display with context
 | 38 | `:g/<pattern>/z#.5\|echo "=========="`       | display beautifully
-| 39 | `:g/\|/norm 2f\|r*`                          | replace 2nd \| with a star(Combining g// with normal mode commands)
+| 39 | `:g/\|/norm 2f\|r*`                          | replace 2nd `\|` with a star(Combining `g//` with normal mode commands)
 | 40 | `:nmap <F3>  :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR><CR>` | send output of previous global command to a new window
-| <td rowspan=4>**Best-Global combined with substitute**
+| <td rowspan=4>**Best-Global-combined-with-substitute**
 |  1 | `:'a,'bg/fred/s/joe/susan/gic`               | can use memory to extend matching
 |  2 | `:/fred/,/joe/s/fred/joe/gic`                | non-line based (ultra)
 |  3 | `:/biz/,/any/g/article/s/wheel/bucket/gic`   | non-line based [N]
