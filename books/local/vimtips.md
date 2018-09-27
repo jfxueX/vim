@@ -1,6 +1,6 @@
 |<td rowspan=1>   | **keys** | **description**
 | -  | -           |-
-| <td rowspan=16>**best-searching**
+| <td rowspan=44>**best-searching**
 | 1  | `/joe/e`     | cursor set to End of match 
 | 2  | `3/joe/e+1`  | find 3rd joe cursor set to End of match plus 1 [C]
 | 3  | `/joe/s-2`   | cursor set to Start of match minus 2
@@ -26,10 +26,10 @@
 | 24 | `/<\zs[^>]*\ze>`              | search for tag contents, ignoring chevrons(\zs and \ze regex delimiters :h /\zs) 
 | 25 | `/<\@<=[^>]*>\@=`             | search for tag contents, ignoring chevrons(zero-width :h /\@=)
 | 26 | `/<\@<=\_[^>]*>\@=`           | search for tags across possible multiple lines(\_ means including newline)
-| 27 | `/<!--\_p\{-}-->`                   : search for multiple line comments
-| 28 | `/fred\_s*joe/`                     : any whitespace including newline *C*
-| 29 | `/bugs\(\_.\)*bunny`                : bugs followed by bunny anywhere in file
-| 30 | `:h \_`                             : help
+| 27 | `/<!--\_p\{-}-->`                   | search for multiple line comments
+| 28 | `/fred\_s*joe/`                     | any whitespace including newline *C*
+| 29 | `/bugs\(\_.\)*bunny`                | bugs followed by bunny anywhere in file
+| 30 | `:h \_`                             | help
 | 31 | `:nmap gx yiw/^\(sub\<bar>function\)\s\+<C-R>"<CR>` | search for declaration of subroutine/function under cursor
 | 32 | `:bufdo /searchstr/`                | multiple file search, use :rewind to recommence search
 | 33 | `:bufdo %s/searchstr/&/gic`   | multiple file search better but cheating, say n and then a to stop
