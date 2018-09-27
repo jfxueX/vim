@@ -44,6 +44,7 @@
 | 42 | `:v/tongue/s/nose/&/gic`      | 
 | 43 | `'a,'bs/extrascost//gc`       | trick: restrict search to between markers (answer n) [N]
 | 44 | `/integ<C-L>`                 | Control-L to complete search term [N]
-
+| <td rowspan=2>**best-substitution**
+| 1  | `:%s/fred/joe/igc`            | general substitute command
 
 [Best of Vim Tips](http://zzapper.co.uk/vimtips.html)
