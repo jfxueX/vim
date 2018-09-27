@@ -44,7 +44,38 @@
 | 42 | `:v/tongue/s/nose/&/gic`      | 
 | 43 | `'a,'bs/extrascost//gc`       | trick: restrict search to between markers (answer n) [N]
 | 44 | `/integ<C-L>`                 | Control-L to complete search term [N]
-| <td rowspan=2>**best-substitution**
+| <td rowspan=32>**best-substitution**
 | 1  | `:%s/fred/joe/igc`            | general substitute command
+| 2 | `:%s//joe/igc`                | Substitute what you last searched for [N]
+| 3 | `:%s/~/sue/igc`               | Substitute your last replacement string [N]
+| 4 | `:%s/\r//g`                   | Delete DOS returns ^M
+| 5 | `:%s/\r/\r/g`                 | Turn DOS returns ^M into real returns(if your Text File jumbled onto one line, use it)
+| 6 | `:%s=  *$==`                  | delete end of line blanks
+| 7 | `:%s= \+$==`                  | Same thing
+| 8 | `:%s#\s*\r\?$##`              | Clean both trailing spaces AND DOS returns
+| 9 | `:%s#\s*\r*$##`               | same thing
+| 10 | `:%s/^\n\{3}//`               | delete blocks of 3 empty lines
+| 11 | `:%s/^\n\+/\r/`               | compressing empty lines
+| 12 | `:%s#<[^>]\+>##g`             | delete html tags, leave text (non-greedy)
+| 13 | `:%s#<\_.\{-1,}>##g`          | delete html tags possibly multi-line (non-greedy)
+| 14 | `:%s#.*\(\d\+hours\).*#\1#`   | Delete all but memorised string (\1) [N]
+|    |                               | **parse xml/soap**
+| 15 | `%s#><\([^/]\)#>\r<\1#g`      | split jumbled up XML file into one tag per line [N]
+| 16 | `%s/</\r&/g`                  | simple split of html/xml/soap  [N]
+| 17 | `:%s#<[^/]#\r&#gic`           | simple split of html/xml/soap  but not closing tag [N]
+| 18 | `:%s#<[^/]#\r&#gi`            | parse on open xml tag [N]
+| 19 | `:%s#\[\d\+\]#\r&#g`          | parse on numbered array elements [1] [N]
+| 20 | `ggVGgJ`                      | rejoin XML without extra spaces (gJ) [N]
+| 21 | `%s=\\n#\d=\r&=g`             | parse PHP error stack [N]
+| 22 | `:%s#^[^\t]\+\t##`            | Delete up to and including first tab [N]
+| 23 | `:'a,'bg/fred/s/dick/joe/igc` | **VERY USEFUL**
+| 24 | `:%s= [^ ]\+$=&&=`            | duplicate end column
+| 25 | `:%s= \f\+$=&&=`              | dupicate filename
+| 26 | `:%s= \S\+$=&&`               | usually the same memory
+| 27 | `:%s#example#& = &#gic`       | duplicate entire matched string [N]
+| 28 | `:%s#.*\(tbl_\w\+\).*#\1#`    | extract list of all strings tbl_* from text  [NC]
+| 29 | `:s/\(.*\):\(.*\)/\2 | \1/`   | reverse fields separated by :
+| 30 | `:%s/^\(.*\)\n\1$/\1/`        | delete duplicate lines
+| 31 | `:%s/^\(.*\)\(\n\1\)\+$/\1/`  | delete multiple duplicate lines [N]
 
 [Best of Vim Tips](http://zzapper.co.uk/vimtips.html)
