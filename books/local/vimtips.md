@@ -90,7 +90,7 @@
 | 39 | `:s/fred/\=@*/g`             | replace string with contents of paste register [N]
 |    |                              | **multiple commands on one line**
 | 40 | `:%s/\f\+\.gif\>/\r&\r/g \| v/\.gif$/d \| %s/gif/jpg/`
-| 41 | `:%s/a/but/gie|:update|:next` | then use @: to repeat
+| 41 | `:%s/a/but/gie<Bar>:update<Bar>:next` | then use @: to repeat
 | 42 | `:%s/goat\|cow/sheep/gc`     | **ORing** (must break pipe)
 | 43 | `:'a,'bs#\[\|\]##g`          | remove [] from lines between markers a and b [N]
 | 44 | `:%s/\v(.*\n){5}/&\r`        | insert a blank line every 5 lines [N]
