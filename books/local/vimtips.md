@@ -139,7 +139,7 @@
 | 22 | `:g/^Chapter/t.\|s/./-/g`    | Automatically underline selecting headings [N]
 | 23 | `:g/\(^I[^^I]*\)\{80}/d`     | delete all lines containing at least 80 tabs
 | 24 | `:g/^/ if line('.')%2\|s/^/zz /`             | perform a substitute on every other line
-| 25 | `:'a,'bg/somestr/co/otherstr/`               | match all lines containing "somestr" between markers a & copy after line containing "otherstr"
+| 25 | `:'a,'bg/somestr/co/otherstr/`               | match all lines containing `somestr` between markers a & `copy` after line containing `otherstr`
 | 26 | `:'a,'bg/str1/s/str1/&&&/\|mo/str2/`         | as above but also do a substitution
 | 27 | `:%norm jdd`                                 | delete every other line
 | 28 | `:.,$g/^\d/exe "norm! \<c-a>"`               | increment numbers, incrementing numbers (type `<c-a>` as 5 characters)
