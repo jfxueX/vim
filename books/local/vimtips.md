@@ -44,7 +44,7 @@
 | 42 | `:v/tongue/s/nose/&/gic`      | 
 | 43 | `'a,'bs/extrascost//gc`       | trick: restrict search to between markers (answer n) [N]
 | 44 | `/integ<C-L>`                 | Control-L to complete search term [N]
-| <td rowspan=32>**best-substitution**
+| <td rowspan=33>**best-substitution**
 | 1  | `:%s/fred/joe/igc`            | general substitute command
 | 2 | `:%s//joe/igc`                | Substitute what you last searched for [N]
 | 3 | `:%s/~/sue/igc`               | Substitute your last replacement string [N]
@@ -74,7 +74,7 @@
 | 26 | `:%s= \S\+$=&&`               | usually the same memory
 | 27 | `:%s#example#& = &#gic`       | duplicate entire matched string [N]
 | 28 | `:%s#.*\(tbl_\w\+\).*#\1#`    | extract list of all strings tbl_* from text  [NC]
-| 29 | `:s/\(.*\):\(.*\)/\2 | \1/`   | reverse fields separated by :
+| 29 | `:s/\(.*\):\(.*\)/\2 \| \1/`   | reverse fields separated by :
 | 30 | `:%s/^\(.*\)\n\1$/\1/`        | delete duplicate lines
 | 31 | `:%s/^\(.*\)\(\n\1\)\+$/\1/`  | delete multiple duplicate lines [N]
 
