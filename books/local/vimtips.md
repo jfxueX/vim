@@ -92,19 +92,19 @@
 | 40 | `:%s/\f\+\.gif\>/\r&\r/g \| v/\.gif$/d \| %s/gif/jpg/`
 | 41 | `:%s/a/but/gie<Bar>:update<Bar>:next` | then use @: to repeat
 | 42 | `:%s/goat\|cow/sheep/gc`     | **ORing** (must break pipe)
-| 43 | `:'a,'bs#\[\|\]##g`          | remove [] from lines between markers a and b [N]
+| 43 | `:'a,'bs#\[\\|\]##g`          | remove [] from lines between markers a and b [N]
 | 44 | `:%s/\v(.*\n){5}/&\r`        | insert a blank line every 5 lines [N]
 |    |                              | **Calling a VIM function**
 | 45 | `:s/__date__/\=strftime("%c")/` | insert datestring
 | 46 | `:inoremap \zd <C-R>=strftime("%d%b%y")<CR>`   | insert date eg 31Jan11 [N]
 | 47 | `:%s:\(\(\w\+\s\+\)\{2}\)str1:\1str2:` | Working with Columns sub any str1 in col3
 | 48 | `:%s:\(\w\+\)\(.*\s\+\)\(\w\+\)$:\3\2\1:` | Swapping first & last column (total 4 columns)
-| 49 | `:%s#\<from\>\|\<where\>\|\<left join\>\|\<\inner join\>#\r&#g` | format a mysql query 
-| 50 | `:redir @*|sil exec 'g#<\(input\|select\|textarea\|/\=form\)\>#p'|redir END` | filter all form elements into paste register
+| 49 | `:%s#\<from\>\\|\<where\>\\|\<left join\>\\|\<\inner join\>#\r&#g` | format a mysql query 
+| 50 | `:redir @*\|sil exec 'g#<\(input\\|select\\|textarea\\|/\=form\)\>#p'\|redir END` | filter all form elements into paste register
 | 51 | `:nmap ,z :redir @*<Bar>sil exec 'g@<\(input\<Bar>select\<Bar>textarea\<Bar>/\=form\)\>@p'<Bar>redir END<CR>` |
 | 52 | `:%s/^\(.\{30\}\)xx/\1yy/` | substitute string in column 30 [N]
 | 53 | `:%s/\d\+/\=(submatch(0)-3)/` | decrement numbers by 3
-| 54 | `:g/loc\|function/s/\d/\=submatch(0)+6/` | increment numbers by 6 on certain lines only
+| 54 | `:g/loc\\|function/s/\d/\=submatch(0)+6/` | increment numbers by 6 on certain lines only
 | 55 | `:%s#txtdev\zs\d#\=submatch(0)+1#g` | better `:h /\zs`
 | 56 | `:%s/\(gg\)\@<=\d\+/\=submatch(0)+6/` | increment only numbers `gg\d\d` by 6 (another way)
 |    |                                          | **rename a string with an incrementing number**
