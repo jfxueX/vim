@@ -108,8 +108,8 @@
 | 55 | `:%s#txtdev\zs\d#\=submatch(0)+1#g` | better `:h /\zs`
 | 56 | `:%s/\(gg\)\@<=\d\+/\=submatch(0)+6/` | increment only numbers `gg\d\d` by 6 (another way)
 |    |                                          | **rename a string with an incrementing number**
-| 57 | `:let i=10 | 'a,'bg/Abc/s/yy/\=i/ |let i=i+1` | convert yy to 10,11,12 etc
-| 58 | `:let i=10 | 'a,'bg/Abc/s/xx\zsyy\ze/\=i/ |let i=i+1` | convert xxyy to xx11,xx12,xx13(as above but more precise)
+| 57 | `:let i=10 \| 'a,'bg/Abc/s/yy/\=i/ \|let i=i+1` | convert yy to 10,11,12 etc
+| 58 | `:let i=10 \| 'a,'bg/Abc/s/xx\zsyy\ze/\=i/ \|let i=i+1` | convert xxyy to xx11,xx12,xx13(as above but more precise)
 | 59 | `:%s/"\([^.]\+\).*\zsxx/\1/` | find replacement text, put in memory, then use \zs to simplify substitute
 | 60 | `:nmap <leader>z :%s#\<<c-r>=expand("<cword>")<cr>\>#` | Pull word under cursor into LHS of a substitute
 | 61 | `:vmap <leader>z :<C-U>%s/\<<c-r>*\>/` | Pull Visually Highlighted text into LHS of a substitute
