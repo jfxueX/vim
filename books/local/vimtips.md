@@ -44,7 +44,7 @@
 | 42 | `:v/tongue/s/nose/&/gic`      | 
 | 43 | `'a,'bs/extrascost//gc`       | trick: restrict search to between markers (answer n) [N]
 | 44 | `/integ<C-L>`                 | Control-L to complete search term [N]
-| <td rowspan=33>**best-substitution**
+| <td rowspan=70>**best-substitution**
 | 1  | `:%s/fred/joe/igc`            | general substitute command
 | 2 | `:%s//joe/igc`                | Substitute what you last searched for [N]
 | 3 | `:%s/~/sue/igc`               | Substitute your last replacement string [N]
@@ -77,5 +77,42 @@
 | 29 | `:s/\(.*\):\(.*\)/\2 \| \1/`   | reverse fields separated by :
 | 30 | `:%s/^\(.*\)\n\1$/\1/`        | delete duplicate lines
 | 31 | `:%s/^\(.*\)\(\n\1\)\+$/\1/`  | delete multiple duplicate lines [N]
+|    |                               | **non-greedy matching \{-}**
+| 32 | `:%s/^.\{-}pdf/new.pdf/`     | delete to 1st occurence of pdf only (non-greedy)
+| 33 | `%s#^.\{-}\([0-9]\{3,4\}serial\)#\1#gic` | delete up to 123serial or 1234serial [N]
+| 34 | `:%s#\<[zy]\?tbl_[a-z_]\+\>#\L&#gc` | lowercase with optional leading characters("use of optional atom \?")
+| 35 | `:%s/<!--\_.\{-}-->//`       | delete possibly **multi-line** comments
+|    | `:help /\{-}`                | help non-greedy
+|    |                              | **substitute using a register**
+| 36 | `:s/fred/<c-r>a/g`           | substitute "fred" with contents of register "a"
+| 37 | `:s/fred/<c-r>asome_text<c-r>s/g` |
+| 38 | `:s/fred/\=@a/g`             | better alternative as register not displayed (not *) [C]
+| 39 | `:s/fred/\=@*/g`             | replace string with contents of paste register [N]
+|    |                              | **multiple commands on one line**
+| 40 | `:%s/\f\+\.gif\>/\r&\r/g \| v/\.gif$/d \| %s/gif/jpg/`
+| 41 | `:%s/a/but/gie|:update|:next` | then use @: to repeat
+| 42 | `:%s/goat\|cow/sheep/gc`     | **ORing** (must break pipe)
+| 43 | `:'a,'bs#\[\|\]##g`          | remove [] from lines between markers a and b [N]
+| 44 | `:%s/\v(.*\n){5}/&\r`        | insert a blank line every 5 lines [N]
+|    |                              | **Calling a VIM function**
+| 45 | `:s/__date__/\=strftime("%c")/` | insert datestring
+| 46 | `:inoremap \zd <C-R>=strftime("%d%b%y")<CR>`   | insert date eg 31Jan11 [N]
+| 47 | `:%s:\(\(\w\+\s\+\)\{2}\)str1:\1str2:` | Working with Columns sub any str1 in col3
+| 48 | `:%s:\(\w\+\)\(.*\s\+\)\(\w\+\)$:\3\2\1:` | Swapping first & last column (total 4 columns)
+| 49 | `:%s#\<from\>\|\<where\>\|\<left join\>\|\<\inner join\>#\r&#g` | format a mysql query 
+| 50 | `:redir @*|sil exec 'g#<\(input\|select\|textarea\|/\=form\)\>#p'|redir END` | filter all form elements into paste register
+| 51 | `:nmap ,z :redir @*<Bar>sil exec 'g@<\(input\<Bar>select\<Bar>textarea\<Bar>/\=form\)\>@p'<Bar>redir END<CR>` |
+| 52 | `:%s/^\(.\{30\}\)xx/\1yy/` | substitute string in column 30 [N]
+| 53 | `:%s/\d\+/\=(submatch(0)-3)/` | decrement numbers by 3
+| 54 | `:g/loc\|function/s/\d/\=submatch(0)+6/` | increment numbers by 6 on certain lines only
+| 55 | `:%s#txtdev\zs\d#\=submatch(0)+1#g` | better `:h /\zs`
+| 56 | `:%s/\(gg\)\@<=\d\+/\=submatch(0)+6/` | increment only numbers `gg\d\d` by 6 (another way)
+|    |                                          | **rename a string with an incrementing number**
+| 57 | `:let i=10 | 'a,'bg/Abc/s/yy/\=i/ |let i=i+1` | convert yy to 10,11,12 etc
+| 58 | `:let i=10 | 'a,'bg/Abc/s/xx\zsyy\ze/\=i/ |let i=i+1` | convert xxyy to xx11,xx12,xx13(as above but more precise)
+| 59 | `:%s/"\([^.]\+\).*\zsxx/\1/` | find replacement text, put in memory, then use \zs to simplify substitute
+| 60 | `:nmap <leader>z :%s#\<<c-r>=expand("<cword>")<cr>\>#` | Pull word under cursor into LHS of a substitute
+| 61 | `:vmap <leader>z :<C-U>%s/\<<c-r>*\>/` | Pull Visually Highlighted text into LHS of a substitute
+| 62 | `:'a,'bs/bucket\(s\)*/bowl\1/gic` | substitute singular or plural [N]
 
 [Best of Vim Tips](http://zzapper.co.uk/vimtips.html)
