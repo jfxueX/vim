@@ -77,24 +77,24 @@
 | 29 | `:s/\(.*\):\(.*\)/\2 \| \1/`   | reverse fields separated by :
 | 30 | `:%s/^\(.*\)\n\1$/\1/`        | delete duplicate lines
 | 31 | `:%s/^\(.*\)\(\n\1\)\+$/\1/`  | delete multiple duplicate lines [N]
-|    |                               | **non-greedy matching \{-}**
+|    |                               | ***non-greedy matching \{-}***
 | 32 | `:%s/^.\{-}pdf/new.pdf/`     | delete to 1st occurence of pdf only (non-greedy)
 | 33 | `%s#^.\{-}\([0-9]\{3,4\}serial\)#\1#gic` | delete up to 123serial or 1234serial [N]
 | 34 | `:%s#\<[zy]\?tbl_[a-z_]\+\>#\L&#gc` | lowercase with optional leading characters("use of optional atom \?")
 | 35 | `:%s/<!--\_.\{-}-->//`       | delete possibly **multi-line** comments
 |    | `:help /\{-}`                | help non-greedy
-|    |                              | **substitute using a register**
-| 36 | `:s/fred/<c-r>a/g`           | substitute "fred" with contents of register "a"
+|    |                              | ***substitute using a register***
+| 36 | `:s/fred/<c-r>a/g`           | substitute "fred" with contents of register `a`
 | 37 | `:s/fred/<c-r>asome_text<c-r>s/g` |
 | 38 | `:s/fred/\=@a/g`             | better alternative as register not displayed (not *) [C]
 | 39 | `:s/fred/\=@*/g`             | replace string with contents of paste register [N]
-|    |                              | **multiple commands on one line**
+|    |                              | ***multiple commands on one line***
 | 40 | `:%s/\f\+\.gif\>/\r&\r/g \| v/\.gif$/d \| %s/gif/jpg/`
 | 41 | `:%s/a/but/gie<Bar>:update<Bar>:next` | then use @: to repeat
 | 42 | `:%s/goat\|cow/sheep/gc`     | **ORing** (must break pipe)
 | 43 | `:'a,'bs#\[\\|\]##g`          | remove [] from lines between markers a and b [N]
 | 44 | `:%s/\v(.*\n){5}/&\r`        | insert a blank line every 5 lines [N]
-|    |                              | **Calling a VIM function**
+|    |                              | ***Calling a VIM function***
 | 45 | `:s/__date__/\=strftime("%c")/` | insert datestring
 | 46 | `:inoremap \zd <C-R>=strftime("%d%b%y")<CR>`   | insert date eg 31Jan11 [N]
 | 47 | `:%s:\(\(\w\+\s\+\)\{2}\)str1:\1str2:` | Working with Columns sub any str1 in col3
@@ -144,7 +144,7 @@
 | 27 | `:%norm jdd`                                 | delete every other line
 | 28 | `:.,$g/^\d/exe "norm! \<c-a>"`               | increment numbers, incrementing numbers (type `<c-a>` as 5 characters)
 | 29 | `:'a,'bg/\d\+/norm! ^A`                      | increment numbers, storing glob results (note must use **APPEND**) you need to empty reg a first with qaq. 
-|    |                                              | **save results to a register/paste buffer**
+|    |                                              | ***save results to a register/paste buffer***
 | 30 | `:g/fred/y A`                                | append all lines fred to register `a`
 | 31 | `:g/fred/y A \| :let @*=@a`                  | put into paste buffer
 | 32 | `:g//y A \| :let @*=@a`                      | put last glob into paste buffer [N]
@@ -152,7 +152,7 @@
 | 34 | `:'a,'bg/^Error/ . w >> errors.txt`          | filter lines to a file (file must already exist)
 | 35 | `:g/./yank\|put\|-1s/'/"/g\|s/.*/Print '&'/` | duplicate every line in a file wrap a print '' around each duplicate
 | 36 | `:g/^MARK$/r tmp.txt \| -d`                  | replace string with contents of a file, `-d` deletes the "mark"
-|    |                                              | display prettily
+|    |                                              | ***display prettily***
 | 37 | `:g/<pattern>/z#.5`                          | display with context
 | 38 | `:g/<pattern>/z#.5\|echo "=========="`       | display beautifully
 | 39 | `:g/\|/norm 2f\|r*`                          | replace 2nd `\|` with a star(Combining `g//` with normal mode commands)
