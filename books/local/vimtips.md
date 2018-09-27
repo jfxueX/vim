@@ -46,20 +46,20 @@
 | 44 | `/integ<C-L>`                 | Control-L to complete search term [N]
 | <td rowspan=70>**best-substitution**
 | 1  | `:%s/fred/joe/igc`            | general substitute command
-| 2 | `:%s//joe/igc`                | Substitute what you last searched for [N]
-| 3 | `:%s/~/sue/igc`               | Substitute your last replacement string [N]
-| 4 | `:%s/\r//g`                   | Delete DOS returns ^M
-| 5 | `:%s/\r/\r/g`                 | Turn DOS returns ^M into real returns(if your Text File jumbled onto one line, use it)
-| 6 | `:%s=  *$==`                  | delete end of line blanks
-| 7 | `:%s= \+$==`                  | Same thing
-| 8 | `:%s#\s*\r\?$##`              | Clean both trailing spaces AND DOS returns
-| 9 | `:%s#\s*\r*$##`               | same thing
+| 2  | `:%s//joe/igc`                | Substitute what you last searched for [N]
+| 3  | `:%s/~/sue/igc`               | Substitute your last replacement string [N]
+| 4  | `:%s/\r//g`                   | Delete DOS returns ^M
+| 5  | `:%s/\r/\r/g`                 | Turn DOS returns ^M into real returns(if your Text File jumbled onto one line, use it)
+| 6  | `:%s=  *$==`                  | delete end of line blanks
+| 7  | `:%s= \+$==`                  | Same thing
+| 8  | `:%s#\s*\r\?$##`              | Clean both trailing spaces AND DOS returns
+| 9  | `:%s#\s*\r*$##`               | same thing
 | 10 | `:%s/^\n\{3}//`               | delete blocks of 3 empty lines
 | 11 | `:%s/^\n\+/\r/`               | compressing empty lines
 | 12 | `:%s#<[^>]\+>##g`             | delete html tags, leave text (non-greedy)
 | 13 | `:%s#<\_.\{-1,}>##g`          | delete html tags possibly multi-line (non-greedy)
 | 14 | `:%s#.*\(\d\+hours\).*#\1#`   | Delete all but memorised string (\1) [N]
-|    |                               | **parse xml/soap**
+|    |                               | ***parse xml/soap***
 | 15 | `%s#><\([^/]\)#>\r<\1#g`      | split jumbled up XML file into one tag per line [N]
 | 16 | `%s/</\r&/g`                  | simple split of html/xml/soap  [N]
 | 17 | `:%s#<[^/]#\r&#gic`           | simple split of html/xml/soap  but not closing tag [N]
@@ -78,23 +78,23 @@
 | 30 | `:%s/^\(.*\)\n\1$/\1/`        | delete duplicate lines
 | 31 | `:%s/^\(.*\)\(\n\1\)\+$/\1/`  | delete multiple duplicate lines [N]
 |    |                               | ***non-greedy matching \{-}***
-| 32 | `:%s/^.\{-}pdf/new.pdf/`     | delete to 1st occurence of pdf only (non-greedy)
+| 32 | `:%s/^.\{-}pdf/new.pdf/`      | delete to 1st occurence of pdf only (non-greedy)
 | 33 | `%s#^.\{-}\([0-9]\{3,4\}serial\)#\1#gic` | delete up to 123serial or 1234serial [N]
 | 34 | `:%s#\<[zy]\?tbl_[a-z_]\+\>#\L&#gc` | lowercase with optional leading characters("use of optional atom \?")
-| 35 | `:%s/<!--\_.\{-}-->//`       | delete possibly **multi-line** comments
-|    | `:help /\{-}`                | help non-greedy
-|    |                              | ***substitute using a register***
-| 36 | `:s/fred/<c-r>a/g`           | substitute "fred" with contents of register `a`
+| 35 | `:%s/<!--\_.\{-}-->//`        | delete possibly **multi-line** comments
+|    | `:help /\{-}`                 | help non-greedy
+|    |                               | ***substitute using a register***
+| 36 | `:s/fred/<c-r>a/g`            | substitute "fred" with contents of register `a`
 | 37 | `:s/fred/<c-r>asome_text<c-r>s/g` |
-| 38 | `:s/fred/\=@a/g`             | better alternative as register not displayed (not *) [C]
-| 39 | `:s/fred/\=@*/g`             | replace string with contents of paste register [N]
-|    |                              | ***multiple commands on one line***
+| 38 | `:s/fred/\=@a/g`              | better alternative as register not displayed (not *) [C]
+| 39 | `:s/fred/\=@*/g`              | replace string with contents of paste register [N]
+|    |                               | ***multiple commands on one line***
 | 40 | `:%s/\f\+\.gif\>/\r&\r/g \| v/\.gif$/d \| %s/gif/jpg/`
 | 41 | `:%s/a/but/gie<Bar>:update<Bar>:next` | then use @: to repeat
-| 42 | `:%s/goat\|cow/sheep/gc`     | **ORing** (must break pipe)
+| 42 | `:%s/goat\|cow/sheep/gc`      | **ORing** (must break pipe)
 | 43 | `:'a,'bs#\[\\|\]##g`          | remove [] from lines between markers a and b [N]
-| 44 | `:%s/\v(.*\n){5}/&\r`        | insert a blank line every 5 lines [N]
-|    |                              | ***Calling a VIM function***
+| 44 | `:%s/\v(.*\n){5}/&\r`         | insert a blank line every 5 lines [N]
+|    |                               | ***Calling a VIM function***
 | 45 | `:s/__date__/\=strftime("%c")/` | insert datestring
 | 46 | `:inoremap \zd <C-R>=strftime("%d%b%y")<CR>`   | insert date eg 31Jan11 [N]
 | 47 | `:%s:\(\(\w\+\s\+\)\{2}\)str1:\1str2:` | Working with Columns sub any str1 in col3
@@ -107,7 +107,7 @@
 | 54 | `:g/loc\\|function/s/\d/\=submatch(0)+6/`                | increment numbers by 6 on certain lines only
 | 55 | `:%s#txtdev\zs\d#\=submatch(0)+1#g`                      | better `:h /\zs`
 | 56 | `:%s/\(gg\)\@<=\d\+/\=submatch(0)+6/`                    | increment only numbers `gg\d\d` by 6 (another way)
-|    |                                                          | **rename a string with an incrementing number**
+|    |                                                          | ***rename a string with an incrementing number***
 | 57 | `:let i=10 \| 'a,'bg/Abc/s/yy/\=i/ \|let i=i+1`          | convert `yy` to 10,11,12 etc
 | 58 | `:let i=10 \| 'a,'bg/Abc/s/xx\zsyy\ze/\=i/ \|let i=i+1`  | convert `xxyy` to xx11,xx12,xx13(as above but more precise)
 | 59 | `:%s/"\([^.]\+\).*\zsxx/\1/`                             | find replacement text, put in memory, then use `\zs` to simplify substitute
