@@ -363,7 +363,9 @@ function! CommentBlock(comment, opt)
     " Unpack optional arguments...
     let introducer = get(a:opt, 'intro', '//'                 )
     let box_char   = get(a:opt, 'box',   '*'                  )
-    let width      = get(a:opt, 'width', strlen(a:comment) + 2)" Build the comment box and put the comment inside it...
+    let width      = get(a:opt, 'width', strlen(a:comment) + 2)
+    
+    " Build the comment box and put the comment inside it...
     return introducer . repeat(box_char,width) . "\<CR>"
     \    . introducer . " " . a:comment        . "\<CR>"
     \    . introducer . repeat(box_char,width) . "\<CR>"
