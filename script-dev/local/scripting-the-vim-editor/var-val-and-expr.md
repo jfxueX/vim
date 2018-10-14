@@ -24,64 +24,57 @@ Start with the basic elements of Vimscript
 Damian Conway
 Published on May 06,  2009
 
-**About Vimscript and this series**
-
-Vimscript is a powerful scripting language that lets you modify and
-                    extend the Vim editor. You can use it to create new tools, simplify
-                    common tasks, and even rework existing features of the editor. This
-                    ongoing series of articles assumes
-                    some familiarity with the Vim editor.
 
 ## A great text editor
 
 There's an old joke that Emacs would be a great operating system if only it
-                had a decent text editor, whereas vi would be a great text editor if only
-                it had a decent operating system. This gag reflects the single greatest
-                strategic advantage that Emacs has always had over vi: an embedded
-                extension programming language. Indeed, the fact that Emacs users are
-                happy to put up with RSI-inducing control chords and are willing to write
-                their extensions in Lisp shows just how great an advantage a built-in
-                extension language must be.
+had a decent text editor, whereas vi would be a great text editor if only
+it had a decent operating system. This gag reflects the single greatest
+strategic advantage that Emacs has always had over vi: an embedded
+extension programming language. Indeed, the fact that Emacs users are
+happy to put up with RSI-inducing control chords and are willing to write
+their extensions in Lisp shows just how great an advantage a built-in
+extension language must be.
 
 But vi programmers no longer need cast envious glances towards Emacs'
-                parenthetical scripting
-                language.
-                Our favorite editor can be scripted too&#8212;and much more humanely than
-                Emacs.
+parenthetical scripting
+language.
+Our favorite editor can be scripted too&#8212;and much more humanely than
+Emacs.
 
 In this series of articles, we'll look at the most popular modern variant
-                of vi, the Vim editor, and at the simple yet extremely powerful scripting
-                language that Vim provides. This first article explores the basic building
-                blocks of Vim scripting: variables, values, expressions, simple flow
-                control, and a few of Vim's numerous utility functions.
+of vi, the Vim editor, and at the simple yet extremely powerful scripting
+language that Vim provides. This first article explores the basic building
+blocks of Vim scripting: variables, values, expressions, simple flow
+control, and a few of Vim's numerous utility functions.
 
 I'll assume that you already have access to Vim and are familiar with its
-                interactive features. If that's not the case, some good starting points
-                are Vim's own Web site and various online resources and hardcopy books, or
-                you can simply type `:help` inside Vim itself.
+interactive features. If that's not the case, some good starting points
+are Vim's own Web site and various online resources and hardcopy books, or
+you can simply type `:help` inside Vim itself.
 
 Unless otherwise indicated, all the examples in this series of articles
-                assume you're using Vim version 7.2 or higher. You can check which version
-                of Vim you're using by invoking the editor like so:
+assume you're using Vim version 7.2 or higher. You can check which version
+of Vim you're using by invoking the editor like so:
 
 `vim --version`
 
 or by typing `:version` within Vim itself. If you're using an
-                older incarnation of Vim, upgrading to the latest release is strongly
-                recommended, as previous versions do not support many of the features of
-                Vimscript that we'll be exploring. 
+older incarnation of Vim, upgrading to the latest release is strongly
+recommended, as previous versions do not support many of the features of
+Vimscript that we'll be exploring. 
 
 ## Vimscript
 
 Vim's scripting language, known as Vimscript, is a typical dynamic
-                imperative language and offers most of the usual language features:
-                variables, expressions, control structures, built-in functions,
-                user-defined functions, first-class strings, high-level data structures
-                (lists and dictionaries), terminal and file I/O, regex pattern matching,
-                exceptions, and an integrated debugger.
+imperative language and offers most of the usual language features:
+variables, expressions, control structures, built-in functions,
+user-defined functions, first-class strings, high-level data structures
+(lists and dictionaries), terminal and file I/O, regex pattern matching,
+exceptions, and an integrated debugger.
 
 You can read Vim's own documentation of Vimscript via the built-in help
-                system, by typing:
+system, by typing:
 
 `:help vim-script-intro`
 
@@ -90,330 +83,358 @@ inside any Vim session. Or just read on.
 ### Running Vim scripts
 
 There are numerous ways to execute Vim scripting commands. The simplest
-                approach is to put them in a file (typically with a .vim extension) and
-                then execute the file by `:source`-ing it from within a Vim
-                session:
+approach is to put them in a file (typically with a .vim extension) and
+then execute the file by `:source`-ing it from within a Vim
+session:
 
-`:source /full/path/to/the/scriptfile.vim`
+```vim
+:source /full/path/to/the/scriptfile.vim
+```
 
 Alternatively, you can type scripting commands directly on the Vim command
-                line, after the colon. For example:
+line, after the colon. For example:
 
-`:call MyBackupFunc(expand('%'), { 'all':1, 'save':'recent'})`
+```vim
+:call MyBackupFunc(expand('%'), { 'all':1, 'save':'recent'})
+```
 
 But very few people do that. After all, the whole point of scripting is to
-                    *reduce* the amount of typing you have to do. So the most
-                common way to invoke Vim scripts is by creating new keyboard mappings,
-                like so:
+    *reduce* the amount of typing you have to do. So the most
+common way to invoke Vim scripts is by creating new keyboard mappings,
+like so:
 
-`:nmap ;s :source /full/path/to/the/scriptfile.vim<CR>
+```vim
+:nmap ;s :source /full/path/to/the/scriptfile.vim<CR>
 
-:nmap  \b  :call MyBackupFunc(expand('%'), { 'all': 1 })<CR>`
+:nmap  \b  :call MyBackupFunc(expand('%'), { 'all': 1 })<CR>
+```
 
 Commands like these are usually placed in the .vimrc initialization file in
-                your home directory. Thereafter, when you're in Normal mode (in other
-                words, not inserting text), the key sequence `;s` will execute
-                the specified script file, and a `\b` sequence will call the
-                `MyBackupFunc()` function (which you presumably defined
-                somewhere in your .vimrc as well).
+your home directory. Thereafter, when you're in Normal mode (in other
+words, not inserting text), the key sequence `;s` will execute
+the specified script file, and a `\b` sequence will call the
+`MyBackupFunc()` function (which you presumably defined
+somewhere in your .vimrc as well).
 
 All of the Vimscript examples in this article use key mappings of various
-                types as triggers. In later articles, we'll explore two other common
-                invocation techniques: running scripts as colon commands from Vim's
-                command line, and using editor events to trigger scripts
-                automatically.
+types as triggers. In later articles, we'll explore two other common
+invocation techniques: running scripts as colon commands from Vim's
+command line, and using editor events to trigger scripts
+automatically.
 
-## A syntactic
-                example
+## A syntactic example
 
 Vim has very sophisticated syntax highlighting facilities, which you can
-                turn on with the built-in `:syntax enable` command, and off
-                again with `:syntax off`.
+turn on with the built-in `:syntax enable` command, and off
+again with `:syntax off`.
 
 It's annoying to have to type ten or more characters every time you want to
-                toggle syntax highlighting, though. Instead, you could place the following
-                lines of Vimscript in your .vimrc file:
+toggle syntax highlighting, though. Instead, you could place the following
+lines of Vimscript in your .vimrc file:
 
-##### Listing 1. Toggling syntax
-                    highlighting
+##### Listing 1. Toggling syntax highlighting
 
-    function! ToggleSyntax()
-       if exists("g:syntax_on")
-          syntax off
-       else
-          syntax enable
-       endif
-    endfunction
-    
-    nmap <silent>  ;s  :call ToggleSyntax()<CR>
+```vim
+function! ToggleSyntax()
+   if exists("g:syntax_on")
+      syntax off
+   else
+      syntax enable
+   endif
+endfunction
+
+nmap <silent>  ;s  :call ToggleSyntax()<CR>
+```
 
 This causes the `;s` sequence to flip syntax highlighting on or
-                off each time it's typed when you're in Normal mode. Let's look at each
-                component of that script.
+off each time it's typed when you're in Normal mode. Let's look at each
+component of that script.
 
 The first block of code is obviously a function declaration, defining a
-                function named `ToggleSyntax()`, which takes no arguments. That
-                user-defined function first calls a built-in Vim function named
-                `exists()`, passing it a string. The `exists()`
-                function determines whether a variable with the name specified by the
-                string (in this case, the global variable `g:syntax_on`) has
-                been defined.
+function named `ToggleSyntax()`, which takes no arguments. That
+user-defined function first calls a built-in Vim function named
+`exists()`, passing it a string. The `exists()`
+function determines whether a variable with the name specified by the
+string (in this case, the global variable `g:syntax_on`) has
+been defined.
 
 If so, the `if` statement executes a `syntax off`;
-                otherwise it executes a `syntax enable`. Because
-                `syntax enable` defines the `g:syntax_on` variable,
-                and `syntax off` undefines it, calling the
-                `ToggleSyntax()` function repeatedly alternates between
-                enabling and disabling syntax highlighting.
+otherwise it executes a `syntax enable`. Because
+`syntax enable` defines the `g:syntax_on` variable,
+and `syntax off` undefines it, calling the
+`ToggleSyntax()` function repeatedly alternates between
+enabling and disabling syntax highlighting.
 
 All that remains is to set up a key sequence (`;s` in this
-                example) to call the `ToggleSyntax()` function:
+example) to call the `ToggleSyntax()` function:
 
-`nmap <silent>  ;s  :call ToggleSyntax()<CR>`
+```vim
+nmap <silent>  ;s  :call ToggleSyntax()<CR>
+```
 
 `nmap` stands for "**n**ormal-mode key
-                    **map**ping." The `<silent>` option
-                after the `nmap` causes the mapping not to echo any command
-                it's executing, ensuring that the new `;s` command will do its
-                work unobtrusively. That work is to execute the command:
+    **map**ping." The `<silent>` option
+after the `nmap` causes the mapping not to echo any command
+it's executing, ensuring that the new `;s` command will do its
+work unobtrusively. That work is to execute the command:
 
-`:call ToggleSyntax()<CR>`
+```vim
+:call ToggleSyntax()<CR>
+```
 
 which is how you call a function in Vimscript when you intend to ignore the
-                return value.
+return value.
 
 Note that the `<CR>` at the end is the literal sequence of
-                characters
-                `<`,`C`,`R`,`>`.
-                Vimscript recognizes this as being equivalent to a literal carriage
-                return. In fact, Vimscript understands many other similar representations
-                of unprintable characters. For example, you could create a keyboard
-                mapping to make your space bar act like the page-down key (as it does in
-                most Web browsers), like so:
+characters
+`<`,`C`,`R`,`>`.
+Vimscript recognizes this as being equivalent to a literal carriage
+return. In fact, Vimscript understands many other similar representations
+of unprintable characters. For example, you could create a keyboard
+mapping to make your space bar act like the page-down key (as it does in
+most Web browsers), like so:
 
-`:nmap <Space> <PageDown>`
+```vim
+:nmap <Space> <PageDown>
+```
 
 You can see the complete list of these special symbols by typing
-                `:help keycodes` within Vim.
+`:help keycodes` within Vim.
 
 Note too that `ToggleSyntax()` was able to call the built-in
-                `syntax` command directly. That's because every built-in colon
-                command in Vim is automatically also a statement in Vimscript. For
-                example, to make it easier to create centered titles for documents written
-                in Vim, you could create a function that capitalizes each word on the
-                current line, centers the entire line, and then jumps to the next line,
-                like so:
+`syntax` command directly. That's because every built-in colon
+command in Vim is automatically also a statement in Vimscript. For
+example, to make it easier to create centered titles for documents written
+in Vim, you could create a function that capitalizes each word on the
+current line, centers the entire line, and then jumps to the next line,
+like so:
 
-##### Listing 2. Creating centered
-                    titles
+##### Listing 2. Creating centered titles
 
-    function! CapitalizeCenterAndMoveDown()
-       s/\<./\u&/g   "Built-in substitution capitalizes each word
-       center        "Built-in center command centers entire line
-       +1            "Built-in relative motion (+1 line down)
-    endfunction
-    
-    nmap <silent>  \C  :call CapitalizeCenterAndMoveDown()<CR>
+```vim
+function! CapitalizeCenterAndMoveDown()
+   s/\<./\u&/g   "Built-in substitution capitalizes each word
+   center        "Built-in center command centers entire line
+   +1            "Built-in relative motion (+1 line down)
+endfunction
+
+nmap <silent>  \C  :call CapitalizeCenterAndMoveDown()<CR>
+```
 
 ### Vimscript statements
 
 As the previous examples illustrate, all statements in Vimscript are
-                terminated by a newline (as in shell scripts or Python). If you need to
-                run a statement across multiple lines, the continuation marker is a single
-                backslash. Unusually, the backslash doesn't go at the end of the line to
-                be continued, but rather at the start of the continuation line:
+terminated by a newline (as in shell scripts or Python). If you need to
+run a statement across multiple lines, the continuation marker is a single
+backslash. Unusually, the backslash doesn't go at the end of the line to
+be continued, but rather at the start of the continuation line:
 
-##### Listing 3. Continuing lines using
-                    backslash
+##### Listing 3. Continuing lines using backslash
 
-    call SetName(
-    \             first_name,
-    \             middle_initial,
-    \             family_name
-    \           )
+```vim
+call SetName(
+\             first_name,
+\             middle_initial,
+\             family_name
+\           )
+```
 
 You can also put two or more statements on a single line by separating them
-                with a vertical bar:
+with a vertical bar:
 
-`echo "Starting..." **|** call Phase(1) **|** call Phase(2) **|** echo "Done"`
+```vim
+echo "Starting..." **|** call Phase(1) **|** call Phase(2) **|** echo "Done"
+```
 
 That is, the vertical bar in Vimscript is equivalent to a semicolon in most
-                other programming languages. Unfortunately, Vim couldn't use the
-                semicolon, as that character already means something else at the start of
-                a command (specifically, it means "from the current line to..." as part of
-                the command's line range).
+other programming languages. Unfortunately, Vim couldn't use the
+semicolon, as that character already means something else at the start of
+a command (specifically, it means "from the current line to..." as part of
+the command's line range).
 
 ### Comments
 
 One important use of the vertical bar as a statement separator is in
-                commenting. Vimscript comments start with a double-quote and continue to
-                the end of the line, like so:
+commenting. Vimscript comments start with a double-quote and continue to
+the end of the line, like so:
 
-##### Listing 4. Commenting in
-                Vimscript
+##### Listing 4. Commenting in Vimscript
 
-    if exists("g:syntax_on")
-       syntax off      
-    else
-       syntax enable   
-    endif
+```vim
+if exists("g:syntax_on")
+   syntax off      
+else
+   syntax enable   
+endif
+```
 
 Unfortunately, Vimscript strings can also start with a double-quote and
-                always take precedence over comments. This means you can't put a comment
-                anywhere that a string might be expected, because it will always be
-                interpreted as a string:
+always take precedence over comments. This means you can't put a comment
+anywhere that a string might be expected, because it will always be
+interpreted as a string:
 
-`echo "> "      "Print generic prompt`
+```vim
+echo "> "      "Print generic prompt
+```
 
 The echo command expects one or more strings, so this line produces an
-                error complaining about the missing closing quote on (what Vim assumes to
-                be) the second string.
+error complaining about the missing closing quote on (what Vim assumes to
+be) the second string.
 
 Comments can, however, always appear at the very start of a statement, so
-                you can fix the above problem by using a vertical bar to explicitly begin
-                a new statement before starting the comment, like so:
+you can fix the above problem by using a vertical bar to explicitly begin
+a new statement before starting the comment, like so:
 
-`echo "> "     **|***"Print generic prompt*`
+```vim
+echo "> "     **|***"Print generic prompt*
+```
 
 ### Values and variables
 
-Variable assignment in Vimscript requires a special keyword,
-                `let`:
+Variable assignment in Vimscript requires a special keyword, `let`:
 
-##### Listing 5. Using the let
-                keyword
+##### Listing 5. Using the let keyword
 
-    let name = "Damian"
-    
-    let height = 165
-    
-    let interests = [ 'Cinema', 'Literature', 'World Domination', 101 ]
-    
-    let phone     = { 'cell':5551017346, 'home':5558038728, 'work':'?' }
+```vim
+let name = "Damian"
+
+let height = 165
+
+let interests = [ 'Cinema', 'Literature', 'World Domination', 101 ]
+
+let phone     = { 'cell':5551017346, 'home':5558038728, 'work':'?' }
+```
 
 Note that strings can be specified with either double-quotes or
-                single-quotes as delimiters. Double-quoted strings honor special "escape
-                sequences" such as `"\n"` (for newline), `"\t"` (for
-                tab), `"\u263A"` (for Unicode smiley face), or
-                `"\<ESC>"` (for the escape character). In contrast,
-                single-quoted strings treat everything inside their delimiters as literal
-                characters&#8212;except two consecutive single-quotes, which are treated
-                as a literal single-quote.
+single-quotes as delimiters. Double-quoted strings honor special "escape
+sequences" such as `"\n"` (for newline), `"\t"` (for
+tab), `"\u263A"` (for Unicode smiley face), or
+`"\<ESC>"` (for the escape character). In contrast,
+single-quoted strings treat everything inside their delimiters as literal
+characters&#8212;except two consecutive single-quotes, which are treated
+as a literal single-quote.
 
 Values in Vimscript are typically one of the following three types:
 
 - *scalar*: a single value, such as a string or a number. For
-                    example: `"Damian"` or `165`
+  example: `"Damian"` or `165`
 - *list*: an ordered sequence of values delimited by square
-                    brackets, with implicit integer indices starting at zero. For example:
-                    `['Cinema', 'Literature', 'World Domination', 101]`
+  brackets, with implicit integer indices starting at zero. For example:
+  `['Cinema', 'Literature', 'World Domination', 101]`
 - *dictionary*: an unordered set of values delimited by braces,
-                    with explicit string keys. For example:
-                    `{'cell':5551017346, 'home':5558038728, 'work':'?'}`
+  with explicit string keys. For example:
+  `{'cell':5551017346, 'home':5558038728, 'work':'?'}`
 
 Note that the values in a list or dictionary don't have to be all of the
-                same type; you can mix strings, numbers, and even nested lists and
-                dictionaries if you wish.
+same type; you can mix strings, numbers, and even nested lists and
+dictionaries if you wish.
 
 Unlike values, variables have no inherent type. Instead, they take on the
-                type of the first value assigned to them. So, in the preceding example,
-                the `name` and `height` variables are now scalars
-                (that is, they can henceforth store only strings or numbers),
-                `interests` is now a list variable (that is, it can store only
-                lists), and `phone` is now a dictionary variable (and can store
-                only dictionaries). Variable types, once assigned, are permanent and
-                strictly enforced at runtime:
+type of the first value assigned to them. So, in the preceding example,
+the `name` and `height` variables are now scalars
+(that is, they can henceforth store only strings or numbers),
+`interests` is now a list variable (that is, it can store only
+lists), and `phone` is now a dictionary variable (and can store
+only dictionaries). Variable types, once assigned, are permanent and
+strictly enforced at runtime:
 
-`let interests = 'unknown'       *" Error: variable type mismatch*`
+```vim
+let interests = 'unknown'       *" Error: variable type mismatch*
+```
 
 By default, a variable is scoped to the function in which it is first
-                assigned to, or is global if its first assignment occurs outside any
-                function. However, variables may also be explicitly declared as belonging
-                to other scopes, using a variety of prefixes, as summarized in Table
-                1.
+assigned to, or is global if its first assignment occurs outside any
+function. However, variables may also be explicitly declared as belonging
+to other scopes, using a variety of prefixes, as summarized in Table
+1.
 
-##### Table 1. Vimscript variable
-                    scoping
- Prefix  Meaning ***g:****varname* The variable is global ***s:****varname* The variable is local to the
-                            current script file ***w:****varname* The variable is local to the
-                            current editor window ***t:****varname* The variable is local to the
-                            current editor tab ***b:****varname* The variable is local to the
-                            current editor buffer ***l:****varname* The variable is local to the
-                            current function ***a:****varname* The variable is a parameter of the
-                            current function ***v:****varname* The variable is one that Vim
-                            predefines 
+##### Table 1. Vimscript variable scoping
+
+| Prefix  | Meaning 
+| - | -
+| ***g:****varname* | The variable is global 
+| ***s:****varname* | The variable is local to the current script file 
+| ***w:****varname* | The variable is local to the current editor window 
+| ***t:****varname* | The variable is local to the current editor tab 
+| ***b:****varname* | The variable is local to the current editor buffer 
+| ***l:****varname* | The variable is local to the current function 
+| ***a:****varname* | The variable is a parameter of the current function 
+| ***v:****varname* | The variable is one that Vim predefines 
+
 There are also *pseudovariables* that scripts can use to access the
-                other types of value containers that Vim provides. These are summarized in
-                Table 2.
+other types of value containers that Vim provides. These are summarized in
+Table 2.
 
 ##### Table 2. Vimscript pseudovariables
- Prefix  Meaning ***&****varname* A Vim option (local option if
-                            defined, otherwise global) ***&l:****varname* A local Vim option ***&g:****varname* A global Vim option ***@****varname* A Vim register ***$****varname* An environment variable 
+
+| Prefix | Meaning 
+| - | -
+| ***&****varname*   |  A Vim option (local option if defined, otherwise global) 
+| ***&l:****varname* |  A local Vim option 
+| ***&g:****varname* |  A global Vim option 
+| ***@****varname*   |  A Vim register 
+| ***$****varname*   |  An environment variable 
+
 The "option" pseudovariables can be particularly useful. For example, you
-                could set up two key-maps to increase or decrease the current tabspacing
-                like so:
+could set up two key-maps to increase or decrease the current tabspacing
+like so:
 
-`nmap <silent> ]] :let &tabstop += 1<CR>
+```vim
+nmap <silent> ]] :let &tabstop += 1<CR>
 
-nmap <silent>  [[   :let &tabstop -= &tabstop > 1 ? 1 : 0<CR>`
+nmap <silent>  [[   :let &tabstop -= &tabstop > 1 ? 1 : 0<CR>
+```
 
 ### Expressions
 
 Note that the `[[` key-mapping in the previous example uses an
-                expression containing a C-like "ternary expression":
+expression containing a C-like "ternary expression":
 
-`&tabstop > 1 ? 1 : 0`
+```vim
+&tabstop > 1 ? 1 : 0
+```
 
 This prevents the key map from decrementing the current tab spacing below
-                the sane minimum of 1. As this example suggests, expressions in Vimscript
-                are composed of the same basic operators that are used in most other
-                modern scripting languages, and with  generally the
-                same syntax. The available operators (grouped by increasing precedence)
-                are summarized in Table 3.
+the sane minimum of 1. As this example suggests, expressions in Vimscript
+are composed of the same basic operators that are used in most other
+modern scripting languages, and with  generally the
+same syntax. The available operators (grouped by increasing precedence)
+are summarized in Table 3.
 
-##### Table 3. Vimscript operator precedence
-                    table
-**Operation****Operator syntax** Assignment
+##### Table 3. Vimscript operator precedence table
 
-                            Numeric-add-and-assign
- Numeric-subtract-and-assign
+| **Operation** | **Operator syntax** 
+| - | -
+| Assignment                    | **let** *var* **=** *expr*
+| Numeric-add-and-assign        | **let** *var* **+**= *expr* 
+| Numeric-subtract-and-assign   | **let** *var* **-**= *expr* 
+| String-concatenate-and-assign | **let** *var* **.**= *expr* 
+| |
+| Ternary operator              | *bool* **?** *expr-if-true* **:** *expr-if-false* 
+| Logical OR                    | *bool* **\|\|** *bool* 
+| Logical AND                   | *bool* **&&** *bool* 
+| |
+| Numeric or string equality            | *expr* **==** *expr*
+| Numeric or string inequality          | *expr***!=***expr*
+| Numeric or string greater-then        | *expr***>***expr*
+| Numeric or string greater-or-equal    | *expr***>=***expr*
+| Numeric or string less than           |  *expr***<***expr*
+| Numeric or string less-or-equal       | *expr***<=***expr* 
+| |
+| Numeric addition          | *num***+***num*
+| Numeric subtraction       | *num***-***num*
+| String concatenation      | *str***.***str* 
+| |
+| Numeric multiplication    | *num*******num*
+| Numeric division          | *num***/***num*
+| Numeric modulus           | *num***%***num* 
+| | 
+| Convert to number         | **+***num*
+| Numeric negation          | **-** *num*
+| Logical NOT | **!***bool*
+| |
+| Parenthetical precedence | **(***expr***)**
 
-                            String-concatenate-and-assign **let***var***=***expr*
-**let***
-                                var***+=***expr*
-**let***
-                                var***-=***expr*
-**let***
-                                var***.=***expr* Ternary operator *bool***?***expr-if-true***:***expr-if-false* Logical OR *bool***||***bool* Logical AND *bool***&&***bool* Numeric or string equality
-
-                            Numeric or string inequality
- Numeric or string
-                            greater-then
- Numeric or string greater-or-equal
-
-                            Numeric or string less than
- Numeric or string
-                            less-or-equal *expr***==***expr*
-*expr***!=***expr*
-*expr***>***expr*
-*expr***>=***expr*
-*expr***<***expr*
-*expr***<=***expr* Numeric addition
- Numeric
-                            subtraction
- String concatenation *num***+***num*
-*num***-***num*
-*str***.***str* Numeric multiplication
-
-                            Numeric division
- Numeric modulus *num*******num*
-*num***/***num*
-*num***%***num* Convert to number
- Numeric
-                            negation
- Logical NOT **+***num*
-**-***num*
-**!***bool* Parenthetical precedence **(***expr***)**
 ### Logical caveats
 
 In Vimscript, as in C, only the numeric value zero is false in a boolean

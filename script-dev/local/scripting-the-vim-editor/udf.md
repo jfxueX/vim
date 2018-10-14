@@ -368,15 +368,17 @@ You can invoke any standard Vim command&#8212;including
 which causes the command to be repeated once for every line in the
 range:
 
-`*"Delete every line from the current line (.) to the end-of-file ($)...
-*:**.,$**delete
+```pre
+<i>"Delete every line from the current line (.) to the end-of-file ($)...</i>
+:<b>.,$</b>delete
 
-*"Replace "foo" with "bar" everywhere in lines 1 to 10
-*:**1,10**s/foo/bar/
+<i>"Replace "foo" with "bar" everywhere in lines 1 to 10</i>
+:<b>1,10</b>s/foo/bar/
 
-*"Center every line from five above the current line to five below it...
-*:**-5,+5**center
-`
+<i>"Center every line from five above the current line to five below it...</i>
+:<b>-5,+5</b>center
+```
+
 
 You can type `:help cmdline-ranges` in any Vim
 session to learn more about this facility.
