@@ -785,16 +785,12 @@ If, however, a suitable preceding line was identified, the second return
 statement is executed instead. It first gets a copy of that preceding line
 from the current editor buffer:
 
-```vim
-return matchstr(**getline(target_line_num)**, target_pattern)
-```
+<code>return matchstr(**getline(target_line_num)**, target_pattern)</code>
 
 It then finds and returns the one-character string that the previous call
 to `search()` successfully matched:
 
-```vim
-return** matchstr(**getline(target_line_num), **target_pattern)**
-```
+<code>return** matchstr(**getline(target_line_num), **target_pattern)**</code>
 
 Having implemented this new vertical copy behavior inside
 `LookUpwards()`, all that remains is to override the standard
@@ -875,10 +871,14 @@ experience better.
 
 #### Downloadable resources
 
-- [PDF of this content](l-vim-script-1-pdf.pdf)
+- [PDF of this content](https://www.ibm.com/developerworks/linux/library/l-vim-script-1/l-vim-script-1-pdf.pdf)
 
 ---
 
 #### Related topics
 
-- [A Byte of Vim](http://www.swaroopch.com/notes/vim/)
+- [Scripting the Vim editor, Part 1: Variables, values, and expressions](var-val-and-expr.md)
+- [Scripting the Vim editor, Part 2: User-defined functions](udf.md)
+- [Scripting the Vim editor, Part 3: Built-in lists](builtin-lists.md)
+- [Scripting the Vim editor, Part 4: Dictionaries](dictionaries.md)
+- [Scripting the Vim editor, Part 5: Event-driven scripting and automation](event-and-auto.md)

@@ -995,15 +995,15 @@ ameliorates some of the horrors of working with XML.
 
 #### Downloadable resources
 
-- [PDF of this content](l-vim-script-5-pdf.pdf)
+- [PDF of this content](https://www.ibm.com/developerworks/linux/library/l-vim-script-5/l-vim-script-5-pdf.pdf)
 
 ---
 
 #### Related topics
 
-- Start learning about Vimscript, the
-                embedded language for extending the Vim editor, with the first article in
-                this series:
-                "[Scripting
-the Vim editor, Part 1: Variables, values, and
-expressions](http://www.ibm.com/developerworks/linux/library/l-vim-script-1/index.html)"
+- [Scripting the Vim editor, Part 1: Variables, values, and expressions](var-val-and-expr.md)
+- [Scripting the Vim editor, Part 2: User-defined functions](udf.md)
+- [Scripting the Vim editor, Part 3: Built-in lists](builtin-lists.md)
+- [Scripting the Vim editor, Part 4: Dictionaries](dictionaries.md)
+- [Scripting the Vim editor, Part 5: Event-driven scripting and automation](event-and-auto.md)
+

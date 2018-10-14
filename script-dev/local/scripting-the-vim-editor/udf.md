@@ -869,14 +869,15 @@ random-access dictionaries.
 
 #### Downloadable resources
 
-- [PDF of this content](l-vim-script-2-pdf.pdf)
+- [PDF of this content](https://www.ibm.com/developerworks/linux/library/l-vim-script-2/l-vim-script-2-pdf.pdf)
 
 ---
 
 #### Related topics
 
-- Start with "
-[Scripting the Vim editor, Part 1: Variables, values, and expressions](http://www.ibm.com/developerworks/linux/library/l-vim-script-1/index.html)"
-                (developerWorks, May 2009) to learn Vimscript, the embedded language for
-                extending the Vim editor. Create new tools, simplify common tasks, and
-                redesign and replace existing editor features.
+- [Scripting the Vim editor, Part 1: Variables, values, and expressions](var-val-and-expr.md)
+- [Scripting the Vim editor, Part 2: User-defined functions](udf.md)
+- [Scripting the Vim editor, Part 3: Built-in lists](builtin-lists.md)
+- [Scripting the Vim editor, Part 4: Dictionaries](dictionaries.md)
+- [Scripting the Vim editor, Part 5: Event-driven scripting and automation](event-and-auto.md)
+ 
