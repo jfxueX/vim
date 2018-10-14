@@ -1,6 +1,7 @@
 # Scripting the Vim editor
 
 Damian Conway
+
 Published on May 06, 2009
 
 ---

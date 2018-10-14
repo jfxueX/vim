@@ -1,19 +1,25 @@
 ## Contents
 
----
+* [A great text editor](#a-great-text-editor)
+* [Vimscript](#vimscript)
+    * [Running Vim scripts](#running-vim-scripts)
+* [A syntactic example](#a-syntactic-example)
+    * [Vimscript statements](#vimscript-statements)
+    * [Comments](#comments)
+    * [Values and variables](#values-and-variables)
+    * [Expressions](#expressions)
+    * [Logical caveats](#logical-caveats)
+    * [Comparator caveats](#comparator-caveats)
+    * [Arithmetic caveats](#arithmetic-caveats)
+* [Another toggling example](#another-toggling-example)
+* [Scripting in Insert mode](#scripting-in-insert-mode)
+    * [A more complex Insert-mode script](#a-more-complex-insert-mode-script)
+    * [Learning Vim's built-in functions](#learning-vims-built-in-functions)
+* [Looking ahead](#looking-ahead)
+* [Downloadable resources](#downloadable-resources)
+* [Related topics](#related-topics)
 
-- [Introduction](#ibm-pagetitle-h1)
-- [A great text editor](#N10057)
-- [Vimscript](#Vimscript)
-- [A syntactic
-                example](#Asyntacticexample)
-- [Another toggling example](#N10429)
-- [Scripting in
-                Insert mode](#ScriptinginInsertmode)
-- [Looking ahead](#N1059D)
-- [Downloadable resources](#artdownload)
-- [Related topics](#artrelatedtopics)
-- [Comments](#icomments)
+---
 
 Scripting the Vim editor, Part 1
 
@@ -22,6 +28,7 @@ Scripting the Vim editor, Part 1
 Start with the basic elements of Vimscript
 
 Damian Conway
+
 Published on May 06,  2009
 
 
