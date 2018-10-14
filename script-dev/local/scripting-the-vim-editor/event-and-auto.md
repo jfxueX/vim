@@ -703,7 +703,7 @@ endfunction
 ```
 
 Here, the for loop iterates through each timestamp’s signature/replacement
-            pair in the `s:timestamps` dictionary, like so:
+pair in the `s:timestamps` dictionary, like so:
 
 for [signature, replacement] in items(s:timestamps)
 
@@ -740,7 +740,8 @@ filetypes, as shown in Listing 16.
 ##### Listing 16. Context-sensitive timestaming for different filetypes
 
 ```vim
-function! UpdateTimestamp (signature, replacement)silent! execute "'[,']s/" . a:signature . '/\= ' . a:replacement . '/'
+function! UpdateTimestamp (signature, replacement)
+    silent! execute "'[,']s/" . a:signature . '/\= ' . a:replacement . '/'
 endfunction
 
 augroup Timestamping
