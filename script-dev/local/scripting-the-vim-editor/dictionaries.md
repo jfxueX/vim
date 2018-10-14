@@ -173,7 +173,7 @@ endif
 To add an entry to a dictionary, just assign a value to a new key:
 
 ```vim
-    let diagnosis['COBOL'] = 'Dementia'
+let diagnosis['COBOL'] = 'Dementia'
 ```
 
 To merge in multiple entries from another dictionary, use the
