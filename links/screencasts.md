@@ -1,0 +1,2 @@
+- [vimcasts.org](http://vimcasts.org/episodes/archive)
+- [Vim Videos](http://derekwyatt.org/vim/tutorials/index.html)

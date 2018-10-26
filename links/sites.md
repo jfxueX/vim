@@ -10,6 +10,7 @@
 - [Vi Lover][10]
 - [Nameless Vim use][11]: Japanese
 - [永遠に未完成][12]: Japanese
+- [Yuratomo' blog][13]: Japanese
 
 
 [1]:http://www.vim.org/
@@ -24,3 +25,4 @@
 [10]:http://thomer.com/vi/vi.html
 [11]:http://nanasi.jp/
 [12]:https://thinca.hatenablog.com/
+[13]:http://yuratomo.seesaa.net/category/10171415-1.html
